@@ -11,7 +11,7 @@ router.get('/', (req, res) =>{
     res.send(clientes);
 });
 
-
+/*nuevarama*/
 router.post('/', (req, res)=>{
   
     const {nombre, correo_electronico, telefono} = req.body
