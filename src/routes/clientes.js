@@ -12,20 +12,18 @@ router.get('/', (req, res) =>{
 });
 
 
-router.post('/api/clientes', (req, res)=>{
+router.post('/', (req, res)=>{
   
-    const { id, nombre, correo_electronico, telefono} = req.body
-    if(id && nombre && correo_electronico && telefono) {
+    const {nombre, correo_electronico, telefono} = req.body
+    if(  nombre && correo_electronico && telefono) {
         const id = clientes.length +1;
-        const newCliente = {...req.body};
+        const newCliente = {...req.body,id};
         console.log(newCliente);
-        productos.push(newCliente);
+        clientes.push(newCliente);
         res.json(clientes)
     }else {
-        res.json({error: 'Ocurrio un error inesperado'});
+        res.status(500)({error: 'Ocurrio un error inesperado'});
     }
-    res.send('received');
-
  });
 
 
@@ -38,6 +36,7 @@ router.post('/api/clientes', (req, res)=>{
     } )
     res.send(clientes);
 });
+
 
 
 
@@ -57,9 +56,6 @@ router.put('/:id', (req, res)=>{
         res.status(500).json({error: 'Hubo un error'});
     }
 });
-
-        
-        
 
 
 module.exports= router;

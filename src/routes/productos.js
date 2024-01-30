@@ -12,20 +12,18 @@ router.get('/', (req, res) =>{
 });
 
 
-router.post('/api/productos', (req, res)=>{
+router.post('/', (req, res)=>{
   
-    const { id, nombre_producto, precio, descripcion} = req.body
-    if(id && nombre_producto && precio && descripcion) {
+    const {nombre_producto, precio, descripcion} = req.body
+    if(  nombre_producto && precio && descripcion) {
         const id = productos.length +1;
-        const newProducto = {...req.body};
+        const newProducto = {...req.body,id};
         console.log(newProducto);
         productos.push(newProducto);
         res.json(productos)
     }else {
-        res.json({error: 'Ocurrio un error inesperado'});
+        res.status(500)({error: 'Ocurrio un error inesperado'});
     }
-    res.send('received');
-
  });
 
 
